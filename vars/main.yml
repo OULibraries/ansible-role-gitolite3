@@ -1,2 +1,7 @@
 ---
-# vars file for OULibraries.gitolite
+# vars file for OULibraries.gitolite3
+
+
+# gitolite_users:
+
+# gitolite_admins:
