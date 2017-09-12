@@ -1,0 +1,6 @@
+repo gitolite-admin
+    RW+     =   gitadmin
+    RW+     =   {% for user in gitolite_admins %}{{user}}{% endfor %} 
+
+repo testing
+    RW+     =   @all

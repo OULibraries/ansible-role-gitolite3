@@ -1,0 +1,14 @@
+---
+- include: yum.yml
+  become: true
+  tags: gitolite_yum
+
+- include: init.yml
+  become: true
+  tags: gitolite_init        
+
+- include: configure.yml
+  become: yes
+  become_user: gitolite3
+  tags: gitolite_configure
+ 

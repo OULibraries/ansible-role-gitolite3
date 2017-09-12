@@ -1,0 +1,36 @@
+---
+- name: get working copy of gitolite-admin repo
+  git: 
+    repo: /var/lib/gitolite3/repositories/gitolite-admin.git
+    dest: /tmp/gitolite-admin
+    force: yes
+
+- name: install toplevel config
+  copy:
+    src: gitolite.conf
+    dest: /tmp/gitolite-admin/conf/gitolite.conf
+
+- name: verify conf/conf.d location
+  file:
+    path: /tmp/gitolite-admin/conf/conf.d
+    state: directory
+
+- name: configure admin users
+  template:
+   src: admin.conf.j2
+   dest: /tmp/gitolite-admin/conf/conf.d/admin.conf
+            
+- name: install user ssh pubkey files
+  copy:
+    dest: "/tmp/gitolite-admin/keydir/{{ item.name }}.pub"
+    content: "{{ item.pubkey }}"
+  with_items: "{{ gitolite_users }}"
+
+- name: save configuration
+  shell: |
+          git commit -am "Ansible updated config to match role settings."
+          gitolite push --all
+  args:
+    chdir: /tmp/gitolite-admin
+
+        

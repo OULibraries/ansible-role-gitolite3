@@ -1,0 +1,10 @@
+---
+
+- name: create dummy admin key
+  shell: ssh-keygen -f /var/lib/gitolite3/.ssh/gitadmin
+  args:
+    creates: /var/lib/gitolite3/.ssh/gitadmin
+- name: initialize empty gitolite-admin repo
+  shell: gitolite setup -pk /var/lib/gitolite3/.ssh/gitadmin.pub
+  args:
+    creates: /var/lib/gitolite2/repositories/gitolite-admin.git/HEAD
