@@ -30,7 +30,8 @@
 
 - name: save configuration
   shell: |
-          git commit -am "Ansible updated config to match role settings."
+          git add .
+          git commit -m "Ansible updated config to match role settings."
           gitolite push --all
   args:
     chdir: /tmp/gitolite-admin
