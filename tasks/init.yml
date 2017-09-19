@@ -1,7 +1,7 @@
 ---
 
 - name: create dummy admin key
-  shell: ssh-keygen -f /var/lib/gitolite3/.ssh/gitadmin
+  shell: ssh-keygen -q -f /var/lib/gitolite3/.ssh/gitadmin -P  "$(</dev/urandom tr -dc _A-Z-a-z-0-9 | head -c64)"
   args:
     creates: /var/lib/gitolite3/.ssh/gitadmin
 - name: initialize empty gitolite-admin repo
