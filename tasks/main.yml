@@ -5,10 +5,10 @@
 
 - include: init.yml
   become: true
+  become_user: gitolite3
   tags: gitolite_init        
 
 - include: configure.yml
   become: yes
   become_user: gitolite3
   tags: gitolite_configure
- 
